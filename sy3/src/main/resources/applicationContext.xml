@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <description>My beans</description>
+<!--    <bean name="userDao" class="dao.UserDao"></bean>-->
+
+<!--    静态工厂注入-->
+<!--    <bean id="userDao" class="MyBeanFactory" factory-method="BeancreateDaoBean"/>-->
+
+<!--    实例工厂注入-->
+<!--    <bean id="userFactory" class="com.itheima.factory.UserDaoFactory"/>-->
+<!--    <bean id="userDao" factory-method="getUserDao" factory-bean="userFactory"/>-->
+    <bean id="daoBeanFactory" class="DaoBeanFactory"></bean>
+    <bean id="userDao" factory-method="CreateDaoBean" factory-bean="daoBeanFactory"></bean>
+
+
+    <bean name="userService" class="service.UserService">
+<!--        <property name="userDao" ref="userDao"></property>-->
+        <constructor-arg name="userDao" ref="userDao"></constructor-arg>
+    </bean>
+</beans>
